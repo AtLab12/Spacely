@@ -6,9 +6,20 @@
 //
 
 import Foundation
+import SwiftUI
 import AVFoundation
 
-struct LatestNewsViewModel {
+class LatestNewsViewModel: NSObject, ObservableObject {
+    
+    @Published var isSpeaking = false
+    
+    let synthetizer = AVSpeechSynthesizer()
+    
+    override init() {
+        super.init()
+        self.synthetizer.delegate = self
+    }
+    
     func read(message text: String, languageCode: String){
         
         let utterance = AVSpeechUtterance(string: text)
@@ -24,9 +35,22 @@ struct LatestNewsViewModel {
             print(error.localizedDescription)
         }
         
-        let synthetizer = AVSpeechSynthesizer()
-        
         synthetizer.speak(utterance)
         
+        withAnimation {
+            isSpeaking = true
+        }
+        
+    }
+    
+    
+}
+
+extension LatestNewsViewModel: AVSpeechSynthesizerDelegate {
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        withAnimation {
+            self.isSpeaking = false
+        }
     }
 }

@@ -156,7 +156,7 @@ struct SummaryListenButtonFunView: View {
     
     let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/2
     
-    var viewModel = LatestNewsViewModel()
+    @StateObject var viewModel = LatestNewsViewModel()
     
     var body: some View {
         Button {
@@ -169,9 +169,14 @@ struct SummaryListenButtonFunView: View {
                     .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
                     .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 
+                if !viewModel.isSpeaking{
                 Image(systemName: "speaker.wave.2")
                     .font(.system(size: 20))
                     .foregroundColor(.gray)
+                }   else {
+                    EqualizerAnimation()
+                        .frame(width: 30, height: 30)
+                }
             }
         }
         
