@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
+        "state": {
+          "branch": null,
+          "revision": "318e319998bf555c3e914d5c3adb6da05af86a32",
+          "version": "7.1.1"
+        }
+      },
+      {
+        "package": "PureSwiftUI",
+        "repositoryURL": "https://github.com/CodeSlicing/pure-swift-ui.git",
+        "state": {
+          "branch": "develop",
+          "revision": "67b909e143252ddb9f16f776b2329b0b29a57968",
+          "version": null
+        }
+      },
+      {
+        "package": "PureSwiftUIDesign",
+        "repositoryURL": "https://github.com/CodeSlicing/pure-swift-ui-design.git",
+        "state": {
+          "branch": null,
+          "revision": "40489273ee4703032c7d4d185ac25743f604e158",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
