@@ -16,26 +16,31 @@ struct ContentView: View {
     
     @State var viewName = "house.fill"
     @State var showTabBar = true
+    @State var showLauchScrene = true
     
     var body: some View {
         
-        ZStack{
-            switch viewName{
-            case "house.fill":
-                HomeView(newsManager: newsViewModel, showTapBar: $showTabBar)
-            case "heart.text.square.fill":
-                LikedNewsView(showTapBar: $showTabBar)
-            default:
-                HomeView(newsManager: newsViewModel, showTapBar: $showTabBar)
-            }
-            
-            if showTabBar{
-            VStack{
-                Spacer()
+        if !showLauchScrene{
+            ZStack{
+                switch viewName{
+                case "house.fill":
+                    HomeView(newsManager: newsViewModel, showTapBar: $showTabBar)
+                case "heart.text.square.fill":
+                    LikedNewsView(showTapBar: $showTabBar)
+                default:
+                    HomeView(newsManager: newsViewModel, showTapBar: $showTabBar)
+                }
                 
-                CustomTabBar(selectedTabName: $viewName)
+                if showTabBar{
+                    VStack{
+                        Spacer()
+                        
+                        CustomTabBar(selectedTabName: $viewName)
+                    }
+                }
             }
-            }
+        }   else {
+            LaunchScreenAnimation(showLaunchScrene: $showLauchScrene)
         }
         
     }

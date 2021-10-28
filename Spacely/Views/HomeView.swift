@@ -18,9 +18,13 @@ struct HomeView: View {
             
             if !showMoreArticlesView{
                 VStack {
-                    LatestNewsView(newsManager: newsManager, showTapBar: $showTapBar)
-                    NewsFeed(newsManager: newsManager, showMoreArticlesView: $showMoreArticlesView, showTapBar: $showTapBar)
-                    Spacer()
+                    if newsManager.articlesArray.isNotEmpty{
+                        LatestNewsView(newsManager: newsManager, showTapBar: $showTapBar)
+                        NewsFeed(newsManager: newsManager, showMoreArticlesView: $showMoreArticlesView, showTapBar: $showTapBar)
+                        Spacer()
+                    }else {
+                        LoadingArticlesView()
+                    }
                 }
                 .ignoresSafeArea(.container, edges: .top)
                 .onAppear {
