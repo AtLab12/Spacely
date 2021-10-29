@@ -14,7 +14,7 @@ struct TopAlertView: View {
     var body: some View {
         Text(notification)
             .foregroundColor(.black)
-            .font(.system(size: 10, weight: .bold))
+            .font(.custom("Nunito-Bold", size: 10))
             .padding(.vertical, 3)
             .padding(.horizontal, 5)
             .background(Capsule()

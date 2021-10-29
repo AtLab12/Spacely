@@ -18,7 +18,7 @@ struct NewsFeed: View {
             
             HStack {
                 Text("Top news")
-                    .font(.system(size: 30, weight: .bold))
+                    .font(.custom("Nunito-ExtraBold", size: 30))
                     .padding(.leading, 20)
                 
                 Spacer()

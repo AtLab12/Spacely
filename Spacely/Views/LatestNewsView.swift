@@ -19,70 +19,66 @@ struct LatestNewsView: View {
     
     var body: some View {
         ZStack {
-            if !newsManager.articlesArray.isEmpty {
-                if let safeUrl = URL(string: newsManager.articlesArray[0].imageURL) {
-                    KFImage(safeUrl)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: width, height: 350)
-                        .clipShape(RectCustomRound(corner: [.bottomLeft, .bottomRight], size: 35))
-                        .ignoresSafeArea(.container, edges: .top)
-                }
-            }   else {
-                Text("Loading")
-                    .foregroundColor(.black)
-                    .font(.system(size: 16))
+            
+            if let safeUrl = URL(string: newsManager.articlesArray[0].imageURL) {
+                KFImage(safeUrl)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: width, height: 350)
+                    .clipShape(RectCustomRound(corner: [.bottomLeft, .bottomRight], size: 35))
+                    .ignoresSafeArea(.container, edges: .top)
             }
             
+            
             if !newsManager.articlesArray.isEmpty{
-            VStack(spacing: 20){
-                
-                HStack{
+                VStack(spacing: 20){
                     
-                    Spacer()
+                    HStack{
+                        
+                        Spacer()
+                        
+                        if showNewsUpToDateNotification {
+                            TopAlertView(notification: "News up to date")
+                        }
+                        
+                        RefreashButton(newsManager: newsManager, showNewsUpToDateNotification: $showNewsUpToDateNotification)
+                            .padding(.trailing, 30)
+                    }.padding(.bottom, 15)
                     
-                    if showNewsUpToDateNotification {
-                        TopAlertView(notification: "News up to date")
+                    HStack {
+                        ZStack {
+                            Text("Latest news")
+                                .foregroundColor(.black)
+                                .font(.custom("Nunito-ExtraBold", size: 16))
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 7)
+                                .background(Capsule()
+                                                .foregroundColor(Color("BackgroundGray"))
+                                                .opacity(0.7))
+                        }.padding(.leading, 30)
+                        
+                        Spacer()
                     }
                     
-                    RefreashButton(newsManager: newsManager, showNewsUpToDateNotification: $showNewsUpToDateNotification)
-                        .padding(.trailing, 30)
-                }.padding(.bottom, 15)
-                
-                HStack {
-                    ZStack {
-                        Text("Latest news")
-                            .foregroundColor(.black)
-                            .font(.system(size: 16, weight: .semibold))
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 7)
-                            .background(Capsule()
-                                            .foregroundColor(Color("BackgroundGray"))
-                                        .opacity(0.7))
-                    }.padding(.leading, 30)
+                    HStack {
+                        ZStack {
+                            Text(newsManager.articlesArray[0].title)
+                                .foregroundColor(.black)
+                                .font(.system(size: 20, weight: .bold))
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                                .background(RoundedRectangle(cornerRadius: 10)
+                                                .foregroundColor(Color("BackgroundGray"))
+                                                .opacity(0.7))
+                        }.padding(.leading, 30)
+                        
+                        Spacer()
+                    }
                     
-                    Spacer()
+                    LearnModeButton(newsManager: newsManager, showTapBar: $showTapBar)
                 }
-                
-                HStack {
-                    ZStack {
-                        Text(newsManager.articlesArray[0].title)
-                            .foregroundColor(.black)
-                            .font(.system(size: 20, weight: .bold))
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 20)
-                            .background(RoundedRectangle(cornerRadius: 10)
-                                            .foregroundColor(Color("BackgroundGray"))
-                                        .opacity(0.7))
-                    }.padding(.leading, 30)
-                    
-                    Spacer()
-                }
-                
-                LearnModeButton(newsManager: newsManager, showTapBar: $showTapBar)
-            }
-            .padding(.bottom, 15)
-            .padding(.top, 40)
+                .padding(.bottom, 15)
+                .padding(.top, 40)
             }
             
         }
@@ -117,7 +113,7 @@ struct LearnModeButton: View {
             HStack {
                 Text("Learn more")
                     .foregroundColor(.white)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.custom("Nunito-SemiBold", size: 14))
                     .padding(.leading, 30)
                     .padding(.trailing, 10)
                 

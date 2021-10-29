@@ -17,7 +17,7 @@ struct MoreButtonView: View {
             showMoreArticlesView = true
         } label: {
             Text("more")
-                .font(.system(size: 14, weight: .bold))
+                .font(.custom("Nunito-SemiBold", size: 14))
                 .padding(.trailing, 30)
                 .foregroundColor(Color("ModeCorrection"))
         }

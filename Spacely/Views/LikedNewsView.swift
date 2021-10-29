@@ -41,7 +41,7 @@ struct LikedNewsView: View {
                     }
                 
                 Text("No liked articles found.")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.custom("Nunito-ExtraBold", size: 20))
                     .foregroundColor(Color("ModeCorrection"))
             }
         }
@@ -78,13 +78,13 @@ struct LikedListBubble: View {
                 
                 Text(article.title ?? "No title")
                     .foregroundColor(Color("ModeCorrection"))
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.custom("Nunito-ExtraBoldItalic", size: 18))
                     .padding(.bottom, 10)
                 
                 HStack{
-                    Text(article.newsSite ?? "Uknown source")
+                    Text("by \(article.newsSite ?? "Uknown source")")
                         .foregroundColor(.gray)
-                        .font(.system(size: 10, weight: .light))
+                        .font(.custom("Nunito-Light", size: 10))
                     
                     Spacer()
                 }

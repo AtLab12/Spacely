@@ -106,7 +106,7 @@ struct LoadMoreButton: View {
                     .padding(.horizontal, 15)
                 
                 Text("Press to load more articles")
-                    .font(.system(size: 15))
+                    .font(.custom("Nunito-Bold", size: 15))
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
             }

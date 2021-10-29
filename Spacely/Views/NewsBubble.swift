@@ -35,7 +35,7 @@ struct NewsBubble: View {
                     
                 HStack{
                     Text(articleModel.title)
-                            .font(.custom("RNSSanz-Bold", size: 13))
+                            .font(.custom("Nunito-BoldItalic", size: 13))
                             .foregroundColor(Color("ModeCorrection"))
                             .frame(height: 70)
                             .multilineTextAlignment(.leading)
@@ -44,7 +44,7 @@ struct NewsBubble: View {
                 
                 Text("by \(articleModel.newsSite)")
                     .foregroundColor(.gray)
-                    .font(.system(size: 9, weight: .light))
+                    .font(.custom("Nunito-Light", size: 9))
                     .padding(.top, 5)
             }.padding(.leading, 20)
     }

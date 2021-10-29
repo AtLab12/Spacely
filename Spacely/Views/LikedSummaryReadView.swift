@@ -57,8 +57,7 @@ struct LikedSummaryReadView: View {
                     VStack{
                         HStack {
                             Text(article.title ?? "No title")
-                                .font(.title)
-                                .fontWeight(.bold)
+                                .font(.custom("Nunito-ExtraBoldItalic", size: 23))
                                 .padding(.leading, 20)
                                 .padding(.top, 20)
                                 .foregroundColor(.black)
@@ -67,7 +66,7 @@ struct LikedSummaryReadView: View {
                         
                         HStack {
                             Text(article.summary ?? "No summary available")
-                                .font(.system(size: 15, weight:.semibold))
+                                .font(.custom("Nunito-Bold", size: 15))
                                 .lineLimit(15)
                                 .padding(.top, 10)
                                 .padding(.leading, 20)
@@ -78,7 +77,7 @@ struct LikedSummaryReadView: View {
                         
                         HStack {
                             Text("by \(article.newsSite ?? "Uknown source")")
-                                .font(.system(size: 10, weight:.semibold))
+                                .font(.custom("Nunito-Light", size: 10))
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                                 .padding(.top, 10)
@@ -247,7 +246,7 @@ struct LikeArticleReadFullArticleButtonView: View {
                     .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 
                 Text("Read full article")
-                    .font(.system(size: 13, weight: .bold))
+                    .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(.gray)
             }.padding(.horizontal, 20)
         }.padding(.top, 15)

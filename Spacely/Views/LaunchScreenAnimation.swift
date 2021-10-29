@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SpriteKit
+import AVKit
 import PureSwiftUI
 
 struct LaunchScreenAnimation: View {
@@ -14,6 +15,7 @@ struct LaunchScreenAnimation: View {
     var halfScreenSize = UIScreen.main.bounds.height
     @Binding var showLaunchScrene: Bool
     @State var rocketGoesWraWra = false
+    @State var audioPlayer: AVAudioPlayer!
     
     var body: some View {
         ZStack{
@@ -37,6 +39,14 @@ struct LaunchScreenAnimation: View {
                     withAnimation(Animation.linear(duration: 4)) {
                         rocketGoesWraWra = true
                     }
+                    let soundEffect = Bundle.main.path(forResource: "RocketLaunch", ofType: "wav")
+                    self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundEffect!))
+                    self.audioPlayer.play()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+                        self.audioPlayer.stop()
+                    }
+                    
                 }
                 Spacer()
             }

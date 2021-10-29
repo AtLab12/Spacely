@@ -59,8 +59,7 @@ struct SummaryReadView: View {
                     VStack{
                         HStack {
                             Text(newsManager.articlesArray[articleIndex].title)
-                                .font(.title)
-                                .fontWeight(.bold)
+                                .font(.custom("Nunito-ExtraBoldItalic", size: 23))
                                 .padding(.leading, 20)
                                 .padding(.top, 20)
                                 .foregroundColor(.black)
@@ -69,7 +68,7 @@ struct SummaryReadView: View {
                         
                         HStack {
                             Text(newsManager.articlesArray[articleIndex].summary)
-                                .font(.system(size: 15, weight:.semibold))
+                                .font(.custom("Nunito-Bold", size: 15))
                                 .lineLimit(15)
                                 .padding(.top, 10)
                                 .padding(.leading, 20)
@@ -80,7 +79,7 @@ struct SummaryReadView: View {
                         
                         HStack {
                             Text("by \(newsManager.articlesArray[articleIndex].newsSite)")
-                                .font(.system(size: 10, weight:.semibold))
+                                .font(.custom("Nunito-Light", size: 10))
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                                 .padding(.top, 10)
@@ -273,7 +272,7 @@ struct ReadFullArticleButtonView: View {
                     .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                 
                 Text("Read full article")
-                    .font(.system(size: 13, weight: .bold))
+                    .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(.gray)
             }.padding(.horizontal, 20)
         }.padding(.top, 15)
