@@ -12,7 +12,7 @@ struct SummaryLikeButtonFunView: View {
     var articleIndex: Int
     
     @ObservedObject var newsManager: NewsManager
-    
+    @ObservedObject var viewModel: LatestNewsViewModel
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(entity: Article.entity(), sortDescriptors: [
@@ -23,20 +23,22 @@ struct SummaryLikeButtonFunView: View {
     
     var body: some View {
         Button {
-            if checkifArticleLiked() {
-                unlikeArticle()
-            }   else {
-                let article = Article(context: managedObjectContext)
-                article.idNum = Int16(newsManager.articlesArray[articleIndex].id)
-                article.summary = newsManager.articlesArray[articleIndex].summary
-                article.sourceURL = newsManager.articlesArray[articleIndex].sourceURL
-                article.newsSite = newsManager.articlesArray[articleIndex].newsSite
-                article.title = newsManager.articlesArray[articleIndex].title
-                article.imageURL = newsManager.articlesArray[articleIndex].imageURL
-                do {
-                    try managedObjectContext.save()
-                }   catch {
-                    print(error)
+            if !viewModel.isSpeaking{
+                if checkifArticleLiked() {
+                    unlikeArticle()
+                }   else {
+                    let article = Article(context: managedObjectContext)
+                    article.idNum = Int16(newsManager.articlesArray[articleIndex].id)
+                    article.summary = newsManager.articlesArray[articleIndex].summary
+                    article.sourceURL = newsManager.articlesArray[articleIndex].sourceURL
+                    article.newsSite = newsManager.articlesArray[articleIndex].newsSite
+                    article.title = newsManager.articlesArray[articleIndex].title
+                    article.imageURL = newsManager.articlesArray[articleIndex].imageURL
+                    do {
+                        try managedObjectContext.save()
+                    }   catch {
+                        print(error)
+                    }
                 }
             }
         } label: {
@@ -83,6 +85,6 @@ struct SummaryLikeButtonFunView: View {
 
 struct SummaryLikeButtonFunView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryLikeButtonFunView(articleIndex: 0, newsManager: NewsManager())
+        SummaryLikeButtonFunView(articleIndex: 0, newsManager: NewsManager(), viewModel: LatestNewsViewModel())
     }
 }

@@ -15,14 +15,16 @@ struct SummaryListenButtonFunView: View {
     
     let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/3
     
-    @StateObject var viewModel = LatestNewsViewModel()
+    @ObservedObject var viewModel: LatestNewsViewModel
     
     @Binding var selectedLanguage: LanguageCodes
     @Binding var text: (title: String, summary: String)
     
     var body: some View {
         Button {
+            if !viewModel.isSpeaking{
             viewModel.read(message: text.summary == "" ? newsManager.articlesArray[articleIndex].summary : text.summary, languageCode: selectedLanguage.getLanguageCodeForSythethizer())
+            }
         } label: {
             ZStack{
                 Capsule()
@@ -47,6 +49,6 @@ struct SummaryListenButtonFunView: View {
 
 struct SummaryListenButtonFunView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryListenButtonFunView(articleIndex: 0, newsManager: NewsManager(), selectedLanguage: .constant(.englishUS), text: .constant(("","")))
+        SummaryListenButtonFunView(articleIndex: 0, newsManager: NewsManager(), viewModel: LatestNewsViewModel(), selectedLanguage: .constant(.englishUS), text: .constant(("","")))
     }
 }

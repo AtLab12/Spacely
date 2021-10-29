@@ -12,11 +12,13 @@ struct SummaryTranslateButtonFunView: View {
     let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/3
     
     @Binding var showChooseLanguageView: Bool
-    
+    @ObservedObject var viewModel: LatestNewsViewModel
     var body: some View {
         Button {
-            withAnimation {
-                showChooseLanguageView = true
+            if !viewModel.isSpeaking{
+                withAnimation {
+                    showChooseLanguageView = true
+                }
             }
         } label: {
             ZStack{
@@ -35,12 +37,12 @@ struct SummaryTranslateButtonFunView: View {
                     .foregroundColor(.gray)
             }
         }
-
+        
     }
 }
 
 struct SummaryTranslateButtonFunView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryTranslateButtonFunView(showChooseLanguageView: .constant(false))
+        SummaryTranslateButtonFunView(showChooseLanguageView: .constant(false), viewModel: LatestNewsViewModel())
     }
 }

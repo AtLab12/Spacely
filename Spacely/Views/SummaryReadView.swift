@@ -15,10 +15,11 @@ struct SummaryReadView: View {
     
     @ObservedObject var newsManager: NewsManager
     
+    @StateObject var viewModel = LatestNewsViewModel()
+    
     @Binding var showTapBar: Bool
     
     @State var presentWebArticleSheet = false
-    
     @State var showChooseLanguageView = false
     @State var originalMessageProperties = (title: "", summary: "")
     
@@ -35,7 +36,6 @@ struct SummaryReadView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: UIScreen.main.bounds.width, height: 450)
                             .ignoresSafeArea(.container, edges: .top)
-                        
                         
                         Spacer()
                     }
@@ -94,13 +94,20 @@ struct SummaryReadView: View {
                             Spacer()
                         }
                         
-                        HStack(spacing: 10){
-                            SummaryListenButtonFunView(articleIndex: articleIndex, newsManager: newsManager, selectedLanguage: $language, text: $originalMessageProperties)
+                        
                             
-                            SummaryLikeButtonFunView(articleIndex: articleIndex, newsManager: newsManager)
                             
-                            SummaryTranslateButtonFunView(showChooseLanguageView: $showChooseLanguageView)
-                        }.padding(.horizontal, 20)
+                            HStack(spacing: 10){
+                                
+                                
+                                SummaryListenButtonFunView(articleIndex: articleIndex, newsManager: newsManager, viewModel: viewModel, selectedLanguage: $language, text: $originalMessageProperties)
+                                
+                                SummaryLikeButtonFunView(articleIndex: articleIndex, newsManager: newsManager, viewModel: viewModel)
+                                
+                                SummaryTranslateButtonFunView(showChooseLanguageView: $showChooseLanguageView, viewModel: viewModel)
+                            }.padding(.horizontal, 20)
+                            
+                            
                         
                         ReadFullArticleButtonView(presentWebArticleSheet: $presentWebArticleSheet)
                         
@@ -117,7 +124,10 @@ struct SummaryReadView: View {
             if showChooseLanguageView{
                 LanguagesChoiceView(selectedLanguage: $language, text: $originalMessageProperties, showLanguageChoiceView: $showChooseLanguageView, title: newsManager.articlesArray[articleIndex].title, summary: newsManager.articlesArray[articleIndex].summary)
             }
+            
         }
+        
+        
         .onAppear {
             showTapBar = false
         }
