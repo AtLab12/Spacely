@@ -11,6 +11,7 @@ import Kingfisher
 struct SummaryReadView: View {
     
     var articleIndex: Int
+    @State var language = LanguageCodes.englishUS
     
     @ObservedObject var newsManager: NewsManager
     
@@ -18,7 +19,11 @@ struct SummaryReadView: View {
     
     @State var presentWebArticleSheet = false
     
+    @State var showChooseLanguageView = false
+    @State var originalMessageProperties = (title: "", summary: "")
+    
     var body: some View {
+        
         
         ZStack{
             if let safeUrl = URL(string: newsManager.articlesArray[articleIndex].imageURL){
@@ -45,6 +50,7 @@ struct SummaryReadView: View {
                         Spacer()
                     }
                 }
+                .blur(radius: showChooseLanguageView ? 10 : 0)
             }
             
             VStack {
@@ -58,7 +64,7 @@ struct SummaryReadView: View {
                     
                     VStack{
                         HStack {
-                            Text(newsManager.articlesArray[articleIndex].title)
+                            Text(originalMessageProperties.title == "" ? newsManager.articlesArray[articleIndex].title : originalMessageProperties.title)
                                 .font(.custom("Nunito-ExtraBoldItalic", size: 23))
                                 .padding(.leading, 20)
                                 .padding(.top, 20)
@@ -67,7 +73,7 @@ struct SummaryReadView: View {
                         }
                         
                         HStack {
-                            Text(newsManager.articlesArray[articleIndex].summary)
+                            Text(originalMessageProperties.summary == "" ? newsManager.articlesArray[articleIndex].summary : originalMessageProperties.summary)
                                 .font(.custom("Nunito-Bold", size: 15))
                                 .lineLimit(15)
                                 .padding(.top, 10)
@@ -89,9 +95,11 @@ struct SummaryReadView: View {
                         }
                         
                         HStack(spacing: 10){
-                            SummaryListenButtonFunView(articleIndex: articleIndex, newsManager: newsManager)
+                            SummaryListenButtonFunView(articleIndex: articleIndex, newsManager: newsManager, selectedLanguage: $language, text: $originalMessageProperties)
                             
                             SummaryLikeButtonFunView(articleIndex: articleIndex, newsManager: newsManager)
+                            
+                            SummaryTranslateButtonFunView(showChooseLanguageView: $showChooseLanguageView)
                         }.padding(.horizontal, 20)
                         
                         ReadFullArticleButtonView(presentWebArticleSheet: $presentWebArticleSheet)
@@ -100,6 +108,14 @@ struct SummaryReadView: View {
                         
                     }.padding(.top, 15)
                 }.padding(.top, 250)
+            }
+            .blur(radius: showChooseLanguageView ? 10 : 0)
+            .onAppear {
+                originalMessageProperties = (newsManager.articlesArray[articleIndex].title, newsManager.articlesArray[articleIndex].summary)
+            }
+            
+            if showChooseLanguageView{
+                LanguagesChoiceView(selectedLanguage: $language, text: $originalMessageProperties, showLanguageChoiceView: $showChooseLanguageView, title: newsManager.articlesArray[articleIndex].title, summary: newsManager.articlesArray[articleIndex].summary)
             }
         }
         .onAppear {
@@ -147,114 +163,7 @@ struct CustomBackButton: View {
     }
 }
 
-struct SummaryListenButtonFunView: View {
-    
-    var articleIndex: Int
-    
-    @ObservedObject var newsManager: NewsManager
-    
-    let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/2
-    
-    @StateObject var viewModel = LatestNewsViewModel()
-    
-    var body: some View {
-        Button {
-            viewModel.read(message: newsManager.articlesArray[articleIndex].summary, languageCode: "en-US")
-        } label: {
-            ZStack{
-                Capsule()
-                    .foregroundColor(Color("BackgroundGray"))
-                    .frame(width: buttonWidth, height: 50)
-                    .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                
-                if !viewModel.isSpeaking{
-                Image(systemName: "speaker.wave.2")
-                    .font(.system(size: 20))
-                    .foregroundColor(.gray)
-                }   else {
-                    EqualizerAnimation()
-                        .frame(width: 30, height: 30)
-                }
-            }
-        }
-        
-    }
-}
 
-struct SummaryLikeButtonFunView: View {
-    
-    var articleIndex: Int
-    
-    @ObservedObject var newsManager: NewsManager
-    
-    @Environment(\.managedObjectContext) var managedObjectContext
-    
-    @FetchRequest(entity: Article.entity(), sortDescriptors: [
-        NSSortDescriptor(keyPath: \Article.idNum, ascending: true)
-    ]) var likedArticles: FetchedResults<Article>
-    
-    let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/2
-    
-    var body: some View {
-        Button {
-            if checkifArticleLiked() {
-                unlikeArticle()
-            }   else {
-                let article = Article(context: managedObjectContext)
-                article.idNum = Int16(newsManager.articlesArray[articleIndex].id)
-                article.summary = newsManager.articlesArray[articleIndex].summary
-                article.sourceURL = newsManager.articlesArray[articleIndex].sourceURL
-                article.newsSite = newsManager.articlesArray[articleIndex].newsSite
-                article.title = newsManager.articlesArray[articleIndex].title
-                article.imageURL = newsManager.articlesArray[articleIndex].imageURL
-                do {
-                    try managedObjectContext.save()
-                }   catch {
-                    print(error)
-                }
-            }
-        } label: {
-            ZStack{
-                Capsule()
-                    .foregroundColor(Color("BackgroundGray"))
-                    .frame(width: buttonWidth, height: 50)
-                    .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                
-                Image(systemName: "heart.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(checkifArticleLiked() ? Color(#colorLiteral(red: 0.9149905443, green: 0.2920166254, blue: 0.4980185628, alpha: 0.8470588235)) : .gray)
-            }
-        }
-        
-    }
-    
-    fileprivate func unlikeArticle() {
-        for article in likedArticles {
-            if article.idNum == newsManager.articlesArray[articleIndex].id{
-                managedObjectContext.delete(article)
-                do {
-                    try managedObjectContext.save()
-                }   catch {
-                    print(error)
-                }
-                return
-            }
-        }
-    }
-    
-    fileprivate func checkifArticleLiked() -> Bool {
-        
-        for article in likedArticles {
-            if article.idNum == newsManager.articlesArray[articleIndex].id{
-                return true
-            }
-        }
-        
-        return false
-    }
-}
 
 struct ReadFullArticleButtonView: View {
     

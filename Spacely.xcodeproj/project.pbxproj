@@ -63,6 +63,14 @@
 		5BF540BC272C44C000E9CF33 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF540AF272C44C000E9CF33 /* Nunito-Regular.ttf */; };
 		5BF540BD272C44C000E9CF33 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF540B0272C44C000E9CF33 /* Nunito-BoldItalic.ttf */; };
 		5BF540BE272C44C000E9CF33 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5BF540B1272C44C000E9CF33 /* Nunito-Light.ttf */; };
+		5BF540C1272C4CC200E9CF33 /* SummaryListenButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540C0272C4CC200E9CF33 /* SummaryListenButtonFunView.swift */; };
+		5BF540C3272C4D0200E9CF33 /* SummaryLikeButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540C2272C4D0200E9CF33 /* SummaryLikeButtonFunView.swift */; };
+		5BF540C5272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540C4272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift */; };
+		5BF540CA272C647E00E9CF33 /* LanguageCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540C9272C647E00E9CF33 /* LanguageCodes.swift */; };
+		5BF540CC272C64FE00E9CF33 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540CB272C64FE00E9CF33 /* TranslationManager.swift */; };
+		5BF540D2272C6B1F00E9CF33 /* LanguagesChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D1272C6B1F00E9CF33 /* LanguagesChoiceView.swift */; };
+		5BF540D4272C6B4600E9CF33 /* LanguagesChoiceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D3272C6B4600E9CF33 /* LanguagesChoiceRowView.swift */; };
+		5BF540D6272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +130,14 @@
 		5BF540AF272C44C000E9CF33 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		5BF540B0272C44C000E9CF33 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
 		5BF540B1272C44C000E9CF33 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		5BF540C0272C4CC200E9CF33 /* SummaryListenButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryListenButtonFunView.swift; sourceTree = "<group>"; };
+		5BF540C2272C4D0200E9CF33 /* SummaryLikeButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryLikeButtonFunView.swift; sourceTree = "<group>"; };
+		5BF540C4272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTranslateButtonFunView.swift; sourceTree = "<group>"; };
+		5BF540C9272C647E00E9CF33 /* LanguageCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCodes.swift; sourceTree = "<group>"; };
+		5BF540CB272C64FE00E9CF33 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
+		5BF540D1272C6B1F00E9CF33 /* LanguagesChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesChoiceView.swift; sourceTree = "<group>"; };
+		5BF540D3272C6B4600E9CF33 /* LanguagesChoiceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesChoiceRowView.swift; sourceTree = "<group>"; };
+		5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageChoiceViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +235,7 @@
 				5B2B6001271C5435000D809F /* ViewModel */,
 				5B2B6005271C564F000D809F /* Model */,
 				5BC6CB1C272B360400B45C9A /* Animations */,
+				5BF540C6272C63F600E9CF33 /* API */,
 				5B2B5FF7271C5420000D809F /* ImageAssets.xcassets */,
 				5B2B6015271CBF9F000D809F /* ColoursAssets.xcassets */,
 				5BC6CB3A272BF9FE00B45C9A /* RocketLaunch.wav */,
@@ -281,7 +298,7 @@
 		5B95A63D271CCCCF002F0AAA /* SummaryReadView */ = {
 			isa = PBXGroup;
 			children = (
-				5B95A63E271CCCE8002F0AAA /* SummaryReadView.swift */,
+				5BF540BF272C4CA100E9CF33 /* SummaryReadViews */,
 				5B0DC06C2722161200D1476B /* LikedSummaryReadView.swift */,
 				5B0DC04D271F47E100D1476B /* WebView */,
 			);
@@ -357,6 +374,45 @@
 				5BC6CB33272B4F1200B45C9A /* Assets.xcassets */,
 			);
 			name = SpriteKitFile;
+			sourceTree = "<group>";
+		};
+		5BF540BF272C4CA100E9CF33 /* SummaryReadViews */ = {
+			isa = PBXGroup;
+			children = (
+				5B95A63E271CCCE8002F0AAA /* SummaryReadView.swift */,
+				5BF540CD272C6AAA00E9CF33 /* TranslationViews */,
+				5BF540C2272C4D0200E9CF33 /* SummaryLikeButtonFunView.swift */,
+				5BF540C0272C4CC200E9CF33 /* SummaryListenButtonFunView.swift */,
+			);
+			name = SummaryReadViews;
+			sourceTree = "<group>";
+		};
+		5BF540C6272C63F600E9CF33 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5BF540C9272C647E00E9CF33 /* LanguageCodes.swift */,
+				5BF540CB272C64FE00E9CF33 /* TranslationManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5BF540CD272C6AAA00E9CF33 /* TranslationViews */ = {
+			isa = PBXGroup;
+			children = (
+				5BF540C4272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift */,
+				5BF540D0272C6B0500E9CF33 /* ChooseLanguageViews */,
+			);
+			name = TranslationViews;
+			sourceTree = "<group>";
+		};
+		5BF540D0272C6B0500E9CF33 /* ChooseLanguageViews */ = {
+			isa = PBXGroup;
+			children = (
+				5BF540D1272C6B1F00E9CF33 /* LanguagesChoiceView.swift */,
+				5BF540D3272C6B4600E9CF33 /* LanguagesChoiceRowView.swift */,
+				5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */,
+			);
+			name = ChooseLanguageViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,7 +519,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF540C3272C4D0200E9CF33 /* SummaryLikeButtonFunView.swift in Sources */,
 				5B0DC030271DCD2F00D1476B /* HomeView.swift in Sources */,
+				5BF540CA272C647E00E9CF33 /* LanguageCodes.swift in Sources */,
 				5B0DC05B2720975400D1476B /* LikeArticles.xcdatamodeld in Sources */,
 				5B0DC048271E1FB900D1476B /* LikedNewsView.swift in Sources */,
 				5B0DC03B271DEC7F00D1476B /* RefreashButton.swift in Sources */,
@@ -472,14 +530,19 @@
 				5BC6CB1E272B363000B45C9A /* EqualizerAnimation.swift in Sources */,
 				5B0DC04F271F480000D1476B /* ArticleWebView.swift in Sources */,
 				5B2B6014271CBF6C000D809F /* NewsBubble.swift in Sources */,
+				5BF540D6272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift in Sources */,
 				5B2B6011271CBE88000D809F /* NewsFeed.swift in Sources */,
 				5B0DC070272329FC00D1476B /* MoreButtonView.swift in Sources */,
 				5B2B5FF6271C541A000D809F /* ContentView.swift in Sources */,
+				5BF540C1272C4CC200E9CF33 /* SummaryListenButtonFunView.swift in Sources */,
 				5B0DC033271DCE4000D1476B /* LatestNewsView.swift in Sources */,
 				5B0DC06D2722161200D1476B /* LikedSummaryReadView.swift in Sources */,
+				5BF540D2272C6B1F00E9CF33 /* LanguagesChoiceView.swift in Sources */,
 				5B0DC03F271E0B3100D1476B /* TabBarButton.swift in Sources */,
 				5B2B6003271C5455000D809F /* NewsManager.swift in Sources */,
 				5B0DC0612720BAEC00D1476B /* PersistanceController.swift in Sources */,
+				5BF540C5272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift in Sources */,
+				5BF540D4272C6B4600E9CF33 /* LanguagesChoiceRowView.swift in Sources */,
 				5B2B6008271C5685000D809F /* ArticleModel.swift in Sources */,
 				5B95A63F271CCCE8002F0AAA /* SummaryReadView.swift in Sources */,
 				5BC6CB2C272B4B2200B45C9A /* LaunchScreenAnimation.swift in Sources */,
@@ -488,6 +551,7 @@
 				5B0DC057272096D000D1476B /* SpacelyApp.swift in Sources */,
 				5B2B600A271C659C000D809F /* NewsData.swift in Sources */,
 				5B0DC07227232A3000D1476B /* MoreArticlesView.swift in Sources */,
+				5BF540CC272C64FE00E9CF33 /* TranslationManager.swift in Sources */,
 				5B0DC04A271E215B00D1476B /* TopAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
