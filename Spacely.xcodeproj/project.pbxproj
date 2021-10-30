@@ -71,6 +71,10 @@
 		5BF540D2272C6B1F00E9CF33 /* LanguagesChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D1272C6B1F00E9CF33 /* LanguagesChoiceView.swift */; };
 		5BF540D4272C6B4600E9CF33 /* LanguagesChoiceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D3272C6B4600E9CF33 /* LanguagesChoiceRowView.swift */; };
 		5BF540D6272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */; };
+		5BF540D9272C965400E9CF33 /* LikeArticleSummaryListenButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540D8272C965400E9CF33 /* LikeArticleSummaryListenButtonFunView.swift */; };
+		5BF540DB272C969200E9CF33 /* LikeArticleSummaryLikeButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540DA272C969100E9CF33 /* LikeArticleSummaryLikeButtonFunView.swift */; };
+		5BF540DD272C971300E9CF33 /* LikeArticleReadFullArticleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540DC272C971300E9CF33 /* LikeArticleReadFullArticleButtonView.swift */; };
+		5BF540DF272C980E00E9CF33 /* LikeArticleSummaryTranslateButtonFunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF540DE272C980E00E9CF33 /* LikeArticleSummaryTranslateButtonFunView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +142,10 @@
 		5BF540D1272C6B1F00E9CF33 /* LanguagesChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesChoiceView.swift; sourceTree = "<group>"; };
 		5BF540D3272C6B4600E9CF33 /* LanguagesChoiceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesChoiceRowView.swift; sourceTree = "<group>"; };
 		5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageChoiceViewModel.swift; sourceTree = "<group>"; };
+		5BF540D8272C965400E9CF33 /* LikeArticleSummaryListenButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArticleSummaryListenButtonFunView.swift; sourceTree = "<group>"; };
+		5BF540DA272C969100E9CF33 /* LikeArticleSummaryLikeButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArticleSummaryLikeButtonFunView.swift; sourceTree = "<group>"; };
+		5BF540DC272C971300E9CF33 /* LikeArticleReadFullArticleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArticleReadFullArticleButtonView.swift; sourceTree = "<group>"; };
+		5BF540DE272C980E00E9CF33 /* LikeArticleSummaryTranslateButtonFunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeArticleSummaryTranslateButtonFunView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,7 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				5BF540BF272C4CA100E9CF33 /* SummaryReadViews */,
-				5B0DC06C2722161200D1476B /* LikedSummaryReadView.swift */,
+				5BF540D7272C963600E9CF33 /* LikedSummaryReadViews */,
 				5B0DC04D271F47E100D1476B /* WebView */,
 			);
 			name = SummaryReadView;
@@ -413,6 +421,18 @@
 				5BF540D5272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift */,
 			);
 			name = ChooseLanguageViews;
+			sourceTree = "<group>";
+		};
+		5BF540D7272C963600E9CF33 /* LikedSummaryReadViews */ = {
+			isa = PBXGroup;
+			children = (
+				5B0DC06C2722161200D1476B /* LikedSummaryReadView.swift */,
+				5BF540DC272C971300E9CF33 /* LikeArticleReadFullArticleButtonView.swift */,
+				5BF540DA272C969100E9CF33 /* LikeArticleSummaryLikeButtonFunView.swift */,
+				5BF540D8272C965400E9CF33 /* LikeArticleSummaryListenButtonFunView.swift */,
+				5BF540DE272C980E00E9CF33 /* LikeArticleSummaryTranslateButtonFunView.swift */,
+			);
+			name = LikedSummaryReadViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -531,6 +551,7 @@
 				5B0DC04F271F480000D1476B /* ArticleWebView.swift in Sources */,
 				5B2B6014271CBF6C000D809F /* NewsBubble.swift in Sources */,
 				5BF540D6272C6B6B00E9CF33 /* LanguageChoiceViewModel.swift in Sources */,
+				5BF540DB272C969200E9CF33 /* LikeArticleSummaryLikeButtonFunView.swift in Sources */,
 				5B2B6011271CBE88000D809F /* NewsFeed.swift in Sources */,
 				5B0DC070272329FC00D1476B /* MoreButtonView.swift in Sources */,
 				5B2B5FF6271C541A000D809F /* ContentView.swift in Sources */,
@@ -538,8 +559,11 @@
 				5B0DC033271DCE4000D1476B /* LatestNewsView.swift in Sources */,
 				5B0DC06D2722161200D1476B /* LikedSummaryReadView.swift in Sources */,
 				5BF540D2272C6B1F00E9CF33 /* LanguagesChoiceView.swift in Sources */,
+				5BF540DF272C980E00E9CF33 /* LikeArticleSummaryTranslateButtonFunView.swift in Sources */,
 				5B0DC03F271E0B3100D1476B /* TabBarButton.swift in Sources */,
 				5B2B6003271C5455000D809F /* NewsManager.swift in Sources */,
+				5BF540D9272C965400E9CF33 /* LikeArticleSummaryListenButtonFunView.swift in Sources */,
+				5BF540DD272C971300E9CF33 /* LikeArticleReadFullArticleButtonView.swift in Sources */,
 				5B0DC0612720BAEC00D1476B /* PersistanceController.swift in Sources */,
 				5BF540C5272C4D5400E9CF33 /* SummaryTranslateButtonFunView.swift in Sources */,
 				5BF540D4272C6B4600E9CF33 /* LanguagesChoiceRowView.swift in Sources */,
@@ -688,6 +712,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Spacely/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = spacely;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -722,6 +747,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Spacely/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = spacely;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

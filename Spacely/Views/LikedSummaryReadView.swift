@@ -12,9 +12,14 @@ struct LikedSummaryReadView: View {
     
     @Binding var showTapBar: Bool
     
+    @State var language = LanguageCodes.englishUS
     @State var presentWebArticleSheet = false
     
     var article: FetchedResults<Article>.Element
+    @StateObject var viewModel = LatestNewsViewModel()
+    
+    @State var showChooseLanguageView = false
+    @State var originalMessageProperties = (title: "", summary: "")
     
     var body: some View {
         
@@ -43,6 +48,7 @@ struct LikedSummaryReadView: View {
                         Spacer()
                     }
                 }
+                .blur(radius: showChooseLanguageView ? 10 : 0)
             }
             
             VStack {
@@ -56,7 +62,7 @@ struct LikedSummaryReadView: View {
                     
                     VStack{
                         HStack {
-                            Text(article.title ?? "No title")
+                            Text(originalMessageProperties.title == "" ? article.title ?? "No title" : originalMessageProperties.title)
                                 .font(.custom("Nunito-ExtraBoldItalic", size: 23))
                                 .padding(.leading, 20)
                                 .padding(.top, 20)
@@ -65,7 +71,7 @@ struct LikedSummaryReadView: View {
                         }
                         
                         HStack {
-                            Text(article.summary ?? "No summary available")
+                            Text(originalMessageProperties.summary == "" ? article.summary ?? "No summary available" : originalMessageProperties.summary)
                                 .font(.custom("Nunito-Bold", size: 15))
                                 .lineLimit(15)
                                 .padding(.top, 10)
@@ -87,9 +93,11 @@ struct LikedSummaryReadView: View {
                         }
                         
                         HStack(spacing: 10){
-                            LikeArticleSummaryListenButtonFunView(article: article)
+                            LikeArticleSummaryListenButtonFunView(article: article, viewModel: viewModel, selectedLanguage: $language, text: $originalMessageProperties)
                             
                             LikeArticleSummaryLikeButtonFunView(article: article, showTapBar: $showTapBar)
+                            
+                            LikeArticleSummaryTranslateButtonFunView(showChooseLanguageView: $showChooseLanguageView, viewModel: viewModel)
                         }.padding(.horizontal, 20)
                         
                         LikeArticleReadFullArticleButtonView(presentWebArticleSheet: $presentWebArticleSheet)
@@ -99,7 +107,17 @@ struct LikedSummaryReadView: View {
                     }.padding(.top, 15)
                 }.padding(.top, 250)
             }
+            .blur(radius: showChooseLanguageView ? 10 : 0)
+            
+            
+            if showChooseLanguageView{
+                LanguagesChoiceView(selectedLanguage: $language, text: $originalMessageProperties, showLanguageChoiceView: $showChooseLanguageView, title: article.title!, summary: article.summary!)
+            }
         }
+        
+        
+        
+        
         .onAppear {
             showTapBar = false
         }
@@ -142,113 +160,5 @@ struct LikeArticleCustomBackButton: View {
                                 .foregroundColor(.black))
         }
         
-    }
-}
-
-struct LikeArticleSummaryListenButtonFunView: View {
-    
-    var article: FetchedResults<Article>.Element
-    
-    let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/2
-    
-    @StateObject var viewModel = LatestNewsViewModel()
-    
-    var body: some View {
-        Button {
-            viewModel.read(message: article.summary ?? "No summary available", languageCode: "en-US")
-                
-        } label: {
-            ZStack{
-                Capsule()
-                    .foregroundColor(Color("BackgroundGray"))
-                    .frame(width: buttonWidth, height: 50)
-                    .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                
-                if !viewModel.isSpeaking{
-                Image(systemName: "speaker.wave.2")
-                    .font(.system(size: 20))
-                    .foregroundColor(.gray)
-                }   else {
-                    EqualizerAnimation()
-                        .frame(width: 30, height: 30)
-                }
-            }
-        }
-        
-    }
-}
-
-struct LikeArticleSummaryLikeButtonFunView: View {
-    
-    var article: FetchedResults<Article>.Element
-    
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @FetchRequest(entity: Article.entity(), sortDescriptors: [
-        NSSortDescriptor(keyPath: \Article.idNum, ascending: true)
-    ]) var likedArticles: FetchedResults<Article>
-    
-    @Binding var showTapBar: Bool
-    
-    let buttonWidth:CGFloat = (UIScreen.main.bounds.width - 60)/2
-    
-    var body: some View {
-        Button {
-            unlikeArticle()
-            showTapBar = true
-            self.presentationMode.wrappedValue.dismiss()
-        } label: {
-            ZStack{
-                Capsule()
-                    .foregroundColor(Color("BackgroundGray"))
-                    .frame(width: buttonWidth, height: 50)
-                    .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                
-                Image(systemName: "heart.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(Color(#colorLiteral(red: 0.9149905443, green: 0.2920166254, blue: 0.4980185628, alpha: 0.8470588235)))
-            }
-        }
-        
-    }
-    
-    fileprivate func unlikeArticle() {
-        for article in likedArticles {
-            if self.article.idNum == article.idNum{
-                managedObjectContext.delete(article)
-                do {
-                    try managedObjectContext.save()
-                }   catch {
-                    print(error)
-                }
-                return
-            }
-        }
-    }
-}
-
-struct LikeArticleReadFullArticleButtonView: View {
-    
-    @Binding var presentWebArticleSheet: Bool
-    
-    var body: some View {
-        Button {
-            presentWebArticleSheet = true
-        } label: {
-            ZStack {
-                Capsule()
-                    .foregroundColor(Color("BackgroundGray"))
-                    .frame( height: 50)
-                    .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                
-                Text("Read full article")
-                    .font(.custom("Nunito-Bold", size: 14))
-                    .foregroundColor(.gray)
-            }.padding(.horizontal, 20)
-        }.padding(.top, 15)
     }
 }

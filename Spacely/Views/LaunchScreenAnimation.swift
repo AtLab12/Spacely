@@ -22,7 +22,7 @@ struct LaunchScreenAnimation: View {
             Color.black
             
             VStack{
-                Text("Spacely")
+                Text("spacely")
                     .font(.system(size: 55))
                     .fontWeight(.bold)
                     .foregroundColor(.white)

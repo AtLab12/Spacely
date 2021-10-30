@@ -117,9 +117,7 @@ struct SummaryReadView: View {
                 }.padding(.top, 250)
             }
             .blur(radius: showChooseLanguageView ? 10 : 0)
-            .onAppear {
-                originalMessageProperties = (newsManager.articlesArray[articleIndex].title, newsManager.articlesArray[articleIndex].summary)
-            }
+            
             
             if showChooseLanguageView{
                 LanguagesChoiceView(selectedLanguage: $language, text: $originalMessageProperties, showLanguageChoiceView: $showChooseLanguageView, title: newsManager.articlesArray[articleIndex].title, summary: newsManager.articlesArray[articleIndex].summary)
